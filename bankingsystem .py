@@ -2,7 +2,7 @@ import random
 import datetime
 
 accounts = {}
-
+# TESTING 
 def generate_account_number():
     """Generate a unique 8-digit account number"""
     while True:
