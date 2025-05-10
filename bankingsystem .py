@@ -1,7 +1,38 @@
 import random
 import datetime
+import json
+import os
 
-accounts = {}
+accounts_file = "accounts.json"
+
+admin_username = "admin"
+admin_password = "admin123
+
+def load_accounts():
+    """Load accounts from a JSON file."""
+    if os.path.exists(accounts_file):
+        with open(accounts_file, "r") as file:
+            return json.load(file)
+    return {}
+def save_accounts():
+    """Save accounts data to a JSON file."""
+    with open(accounts_file, "w") as file:
+        json.dump(accounts, file, indent=4)
+
+accounts = load_accounts()
+
+def admin_login():
+    """Admin login function."""
+    print("\n===== Admin Login =====")
+    username = input("Enter admin username: ").strip()
+    password = input("Enter admin password: ").strip()
+    
+    if username == admin_username and password == admin_password:
+        print("\nLogin successful!")
+        return True
+    else:
+        print("\nInvalid credentials. Access denied.")
+        return False
 # TESTING 
 def generate_account_number():
     """Generate a unique 8-digit account number"""
@@ -56,6 +87,7 @@ def create_account():
     print(f"Account Holder: {name}")
     print(f"Initial Balance: ${initial_balance:.2f}")
     
+    save_accounts()  
     return account_number
 
 def deposit_money():
@@ -90,7 +122,9 @@ def deposit_money():
     print(f"\nDeposit successful!")
     print(f"Deposited: ${amount:.2f}")
     print(f"New Balance: ${accounts[account_number]['balance']:.2f}")
-
+    
+    save_accounts()  
+    
 def withdraw_money():
     """Function to withdraw money from an account"""
     print("\n===== Withdraw Money =====")
@@ -126,6 +160,8 @@ def withdraw_money():
     print(f"\nWithdrawal successful!")
     print(f"Withdrawn: ${amount:.2f}")
     print(f"New Balance: ${accounts[account_number]['balance']:.2f}")
+
+    save_accounts()  
 
 def check_balance():
     """Function to check the balance of an account"""
@@ -229,7 +265,9 @@ def transfer_money():
     print(f"\nTransfer successful!")
     print(f"Transferred: ${amount:.2f} from {from_account} to {to_account}")
     print(f"New Balance (source account): ${accounts[from_account]['balance']:.2f}")
-
+      
+    save_accounts()
+    
 def display_menu():
     """Function to display the menu"""
     print("\n" + "=" * 40)
@@ -246,7 +284,7 @@ def display_menu():
 
 def main():
     """Main function to run the banking application"""
-    print("Welcome to the Mini Banking Application!")
+    print("Welcome to the Bank Of Lanka!")
     
     while True:
         display_menu()
@@ -266,7 +304,7 @@ def main():
         elif choice == "6":
             transfer_money()
         elif choice == "7":
-            print("\nThank you for using the Mini Banking Application. Goodbye!")
+            print("\nThank you for using the Bank Of Lanka. Goodbye!")
             break
         else:
             print("\nInvalid choice. Please try again.")
