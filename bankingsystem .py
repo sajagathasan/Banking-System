@@ -276,7 +276,7 @@ def transfer_money():
 def display_menu():
     """Function to display the menu"""
     print("\n" + "=" * 40)
-    print("        MINI BANKING APPLICATION")
+    print("   BANK OF LANKA BANKING APPLICATION")
     print("=" * 40)
     print("1. Create Account")
     print("2. Deposit Money")
