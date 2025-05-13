@@ -53,7 +53,12 @@ def create_account():
             break
         print("Name cannot be empty. Please try again.")
     
-   
+   while True:
+        adress = input("Enter account holder adress: ").strip()
+        if adress:
+            break
+        print("Adress cannot be empty. Please try again.")
+       
     while True:
         try:
             initial_balance = float(input("Enter initial deposit amount: $"))
@@ -286,6 +291,15 @@ def main():
     """Main function to run the banking application"""
     print("Welcome to the Bank Of Lanka!")
     
+    attempts = 3
+    while attempts > 0:
+        if admin_login():
+            break
+        attempts -= 1
+        print(f"Attempts remaining: {attempts}")
+    else:
+        print("Too many failed attempts. Exiting.")
+        return
     while True:
         display_menu()
         
